@@ -121,10 +121,10 @@ USE_TZ = True
 # STATIC_URL = 'static/'
 
 STATIC_URL = 'static/'
-STATIC_ROOT = "/var/www/project/updatelogic/static/"
+STATIC_ROOT = "/var/www/updatelogic/static/"
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = "/var/www/project/updatelogic/media/"
+MEDIA_ROOT = "/var/www/updatelogic/media/"
 
 
 # Default primary key field type
