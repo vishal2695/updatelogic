@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'updatelogic.middleware.RequestTimeMiddleware',
 ]
 
 ROOT_URLCONF = 'updatelogic.urls'
@@ -150,35 +151,48 @@ SIMPLE_JWT = {
 
 
 import os
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
 
     "formatters": {
         "verbose": {
-            "format": "[{asctime}] {levelname} {name} {message}",
+            "format": "[{asctime}] {levelname} {message}",
             "style": "{",
         },
     },
 
     "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": "/var/log/updatelogic.log",
+        "access_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "/var/www/updatelogic/access.log",
+            "maxBytes": 10 * 1024 * 1024,
+            "backupCount": 5,
+            "formatter": "verbose",
+        },
+        "error_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "/var/www/updatelogic/error.log",
+            "maxBytes": 10 * 1024 * 1024,
+            "backupCount": 5,
             "formatter": "verbose",
         },
     },
 
     "loggers": {
-        "django": {
-            "handlers": ["file"],
+        "django.access": {
+            "handlers": ["access_file"],
             "level": "INFO",
-            "propagate": True,
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["error_file"],
+            "level": "ERROR",
+            "propagate": False,
         },
     },
 }
+
 
 
 
