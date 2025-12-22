@@ -1,5 +1,5 @@
 from celery import shared_task
-from .models import SubStudent
+from .models import SubStudent, Student
 from django.utils import timezone
 import random
 
@@ -12,4 +12,14 @@ def add_dummy_student():
         title=f"Student {random.randint(1,1000)}",
         sub_id=1
     )
-    print("Dummy student added")
+    print("Dummy child student added")
+
+
+@shared_task
+def addd_dummy_student():
+    # Create a dummy student
+    Student.objects.create(
+        name=f"Student {random.randint(1,1000)}",
+        email=f"Student{random.randint(1,1000)}@gmail.com",
+    )
+    print("Dummy student addedd")
