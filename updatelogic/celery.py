@@ -16,4 +16,8 @@ app.conf.beat_schedule = {
         'task': 'api.tasks.add_dummy_student',
         'schedule': crontab(minute='*/5'),
     },
+    'add-dummy-student-every-1-min': {
+        'task': 'api.tasks.addd_dummy_student',
+        'schedule': crontab(minute='*/1'),
+    },
 }
