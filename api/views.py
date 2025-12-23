@@ -99,6 +99,6 @@ def get_test(request):
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("<h1 style='text-align:center;'>Welcome to the Smart World!</h1>")
+    return HttpResponse("<h1 style='text-align:center;'>Welcome to the Smart World!@!</h1>")
 
 
